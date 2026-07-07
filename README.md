@@ -11,9 +11,9 @@
 
 > Practice / follow-along code from class sessions- for personal reference only.
 
-| #  | Module | Topic | Status |
-|----|--------|-------|--------|
-| 00 | ...    | ...   | ...    |
+| #  | Module                               | Topic | Status      |
+|----|--------------------------------------|-------|-------------|
+| 01 | [Java Core](01-modules/01-java-core) | ...   | In progress |
 
 ## Notes
 
