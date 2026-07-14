@@ -2,7 +2,7 @@ package vehicle;
 
 import java.util.Scanner;
 
-public class Ship extends Vehicle {
+public class Ship extends Vehicle implements Sailable {
     private final Scanner sc = new Scanner(System.in);
 
     private double weight;
@@ -33,6 +33,11 @@ public class Ship extends Vehicle {
     @Override
     public double calculatePrice() {
         return 0;
+    }
+
+//    @Override
+    public void sail() {
+        System.out.println("Ship is sailing...");
     }
 
     public double getWeight() {

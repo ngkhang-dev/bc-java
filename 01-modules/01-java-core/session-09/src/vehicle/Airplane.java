@@ -2,7 +2,7 @@ package vehicle;
 
 import java.util.Scanner;
 
-public class Airplane extends Vehicle {
+public class Airplane extends Vehicle implements Runnable, Flyable {
     private final Scanner sc = new Scanner(System.in);
 
     private double flightHeight;
@@ -29,10 +29,19 @@ public class Airplane extends Vehicle {
         System.out.printf("|%-10s|%-20s|%.2f|%3.2f|%-3d|\n", id, name, price, flightHeight, passenger);
     }
 
-
     @Override
     public double calculatePrice() {
         return price * 1.1;
+    }
+
+    @Override
+    public void run() {
+        System.out.println("Airplane is flying...");
+    }
+
+    @Override
+    public void fly() {
+        System.out.println("Airplane is flying...");
     }
 
     public double getHeigth() {

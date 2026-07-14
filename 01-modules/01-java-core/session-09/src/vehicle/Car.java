@@ -2,7 +2,7 @@ package vehicle;
 
 import java.util.Scanner;
 
-public class Car extends Vehicle {
+public class Car extends Vehicle implements Runnable {
     private final Scanner sc = new Scanner(System.in);
 
     protected int seat;
@@ -32,6 +32,11 @@ public class Car extends Vehicle {
     @Override
     public double calculatePrice() {
         return price * 1.2;
+    }
+
+    @Override
+    public void run() {
+        System.out.println("Car is driving...");
     }
 
     public int getSeat() {
