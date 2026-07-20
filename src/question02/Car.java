@@ -14,7 +14,7 @@ public class Car {
         this.productionYear = productionYear;
     }
 
-    public void inThongTin() {
+    public void printInfo() {
         System.out.printf("|Hãng: %-15s | Màu sắc: %-10s | Năm sản xuất: %4d|\n", brand, color, productionYear);
     }
 

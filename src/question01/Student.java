@@ -10,6 +10,7 @@ public class Student {
     private List<Double> grades;
 
     public Student() {
+        this.grades = new ArrayList<Double>();
     }
 
     public Student(String fullName, int yob, double... grades) {
@@ -57,10 +58,10 @@ public class Student {
     }
 
     public List<Double> getGrades() {
-        return grades;
+        return grades == null ? new ArrayList<Double>() : new ArrayList<>(grades);
     }
 
     public void setGrades(List<Double> grades) {
-        this.grades = grades;
+        this.grades = grades == null ? new ArrayList<Double>() : new ArrayList<>(grades);
     }
 }

@@ -16,16 +16,16 @@ public class Game {
         System.out.printf("Trò chơi: %-20s - Lượt chơi: %3d - [Bắt đầu]\n", name, rounds);
     }
 
-    public void ketThuc() {
+    public void endGame() {
         System.out.printf("Trò chơi: %-20s - Lượt chơi: %3d - [Kết thúc]\n", name, rounds);
-    }
-
-    public String endGame() {
-        return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public int getRounds() {

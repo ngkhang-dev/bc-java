@@ -12,6 +12,6 @@ public class MainAppQuestion03 {
             game1.setRounds(game1.getRounds() - 1);
         }
 
-        game1.ketThuc();
+        game1.endGame();
     }
 }
