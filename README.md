@@ -1,36 +1,46 @@
 # BootCamp Java
 
-- [BootCamp Java](#bootcamp-java)
-    - [Modules](#modules)
-    - [Notes](#notes)
-    - [Assignments](#assignments)
-    - [Capstones](#capstones)
-    - [Author](#author)
+## Table of Contents
+
+<!-- TOC -->
+
+* [BootCamp Java](#bootcamp-java)
+    * [Table of Contents](#table-of-contents)
+    * [Modules](#modules)
+    * [Assignments](#assignments)
+    * [Capstones](#capstones)
+    * [Author](#author)
+
+<!-- TOC -->
 
 ## Modules
 
-> Practice / follow-along code from class sessions- for personal reference only.
+> Practice and follow-along code from class sessions, used for personal reference.
 
-| #  | Module                               | Topic | Status      |
-|----|--------------------------------------|-------|-------------|
-| 01 | [Java Core](01-modules/01-java-core) | ...   | In progress |
-
-## Notes
+| #  | Module      | Source code                       | Status      |
+|----|-------------|-----------------------------------|-------------|
+| 01 | Java Core   | [Source](01-modules/01-java-core) | Done        |
+| 02 | HTML-CSS-JS | TBD                               | In progress |
 
 ## Assignments
 
-| # | Repository | Status |
-|---|------------|--------|
+| Module    | #  | Assignment  | Status | Source                                                      |
+|-----------|----|-------------|--------|-------------------------------------------------------------|
+| Java Core | 01 | Conditional | Done   | [Source](02-assignments/01-java-core/assign-01-conditional) |
+| Java Core | 02 | Loop        | Done   | [Source](02-assignments/01-java-core/assign-02-loop)        |
+| Java Core | 03 | OOP         | Done   | [Source](02-assignments/01-java-core/assign-03-oop)         |
+| Java Core | 04 | OOP         | Done   | [Source](02-assignments/01-java-core/assign-04-oop)         |
 
 ## Capstones
 
-| # | Repository | Status |
-|---|------------|--------|
+| #  | Repository                          | Source | Status      |
+|----|-------------------------------------|--------|-------------|
+| 01 | Java Core - Capstone 01 - Employees | TBD    | In progress |
 
 ## Author
 
-- Khang Nguyen
+- Khang Nguyen: [GitHub](https://github.com/ngkhang)
 
 ---
 
-- **Lasted update:**
+- **Last updated:** 2026-08-01 22:09:02
