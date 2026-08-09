@@ -1,6 +1,7 @@
 import manager.EmployeeManager;
 import model.Employee;
 import ui.Menu;
+import ui.Notification;
 
 import java.util.Comparator;
 
@@ -24,20 +25,17 @@ public class MainApplication {
                     hrManager.enterInfoCompany();
                     break;
                 case 2:
-                    System.out.println("\nAssign employee to a manager");
+                    System.out.println("\nAssign staff to a manager");
                     hrManager.assignEmployeeToDeptManager();
                     System.out.println("Assign successfully.");
                     break;
                 case 3:
-                    System.out.println("\nAdd/Delete an employee");
+                    System.out.println("\nAdd/or Delete an employee");
                     hrManager.manageEmployeeRecord();
                     break;
                 case 4:
                     System.out.println("\nPrint information of employees in the company");
-                    System.out.printf("|%-14s|%-25s|%-12s|%-14s|%-13s|%-13s|\n", "ID", "Full Name", "Role", "Phone " +
-                            "Number", "Working Days", "Daily Wage");
                     hrManager.getInfoOfAllEmployees();
-                    System.out.println();
                     break;
                 case 5:
                     System.out.println("\nCalculate total salary of all employees: " + hrManager.getAllSalaryOfCompany());
@@ -55,15 +53,13 @@ public class MainApplication {
                     break;
                 case 8:
                     System.out.println("\nSort employees by name with ascending order");
-                    System.out.printf("|%-14s|%-25s|%-12s|%-14s|%-13s|%-13s|\n",
-                            "ID", "Full Name", "Role", "Phone Number", "Working Days", "Daily Wage");
+                    Notification.printTitle();
                     hrManager.sortEmployees(Comparator.comparing(Employee::getFullName));
                     System.out.println();
                     break;
                 case 9:
                     System.out.println("\nSort employees by salary with descending order");
-                    System.out.printf("|%-14s|%-25s|%-12s|%-14s|%-13s|%-13s|\n",
-                            "ID", "Full Name", "Role", "Phone Number", "Working Days", "Daily Wage");
+                    Notification.printTitle();
                     hrManager.sortEmployees(Comparator.comparing(Employee::calculateMonthlySalary).reversed());
                     System.out.println();
                     break;
@@ -73,7 +69,7 @@ public class MainApplication {
                     System.out.println();
                     break;
                 case 11:
-                    System.out.println("\nCalculate the income of the director: ");
+                    System.out.println("\nCalculate the income of the director");
                     System.out.printf("|%-14s|%-25s|%-14s|%-13s|%-13s|%-12s|%-12s|\n",
                             "ID", "Full Name", "Phone Number", "Working Days", "Daily Wage", "Share Percent (%)",
                             "Income");

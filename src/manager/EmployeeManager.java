@@ -1,7 +1,9 @@
 package manager;
 
 import model.*;
+import ui.Notification;
 import util.InputHelper;
+import util.Role;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,10 +42,13 @@ public class EmployeeManager {
         return Arrays.asList(director1, director2, manager1, manager2, staff1, staff2, staff3, staff4);
     }
 
+    /**
+     * Add a new company
+     */
     public void enterInfoCompany() {
         company.setName(InputHelper.readLine("Enter company name", "Name"));
-        company.setTaxCode(InputHelper.readLine("Enter company tax code", "\\d{10,13}", "Tax Code must be 10 to 13 " +
-                "digits"));
+        company.setTaxCode(InputHelper.readLine("Enter company tax code", "\\d{10,13}",
+                "Tax Code must be 10 to 13 digits"));
         company.setMonthlyRevenue(InputHelper.readDouble("Enter monthly revenue", "Monthly Revenue"));
         company.showInfo();
     }
@@ -108,8 +113,7 @@ public class EmployeeManager {
      * Add a new employee to the company
      */
     public void addEmployee() {
-        String role = InputHelper.readLine("Enter role [STAFF|MANAGER|DIRECTOR]", "(STAFF|MANAGER|DIRECTOR)",
-                "Role must be one of: STAFF, MANAGER, DIRECTOR");
+        int role = InputHelper.readInt("Enter role: Staff-1, Manager-2, Director-3", 1, 3, "Role");
 
         String fullName = InputHelper.readLine("Enter full name", ".{3,}", "Full name must be at least 3 characters");
         String phoneNumber = InputHelper.readLine("Enter phone number", "\\d{10,11}",
@@ -119,7 +123,7 @@ public class EmployeeManager {
         String id = generateId(role);
         Employee newEmployee;
 
-        if (role.equals("STAFF")) {
+        if (Role.STAFF.getValue() == role) {
             Manager manager = null;
             String managerId = InputHelper.readLine("Enter manager ID (leave blank if none)");
 
@@ -127,8 +131,8 @@ public class EmployeeManager {
                 manager = findManagerById(managerId);
                 if (manager == null) {
                     System.out.printf("""
-                            No manager found with ID %s.
-                            Staff will be added without a manager.
+                            - No manager found with ID %s.
+                            - Staff will be added without a manager.
                             """, managerId);
                 }
             }
@@ -140,7 +144,7 @@ public class EmployeeManager {
 
             newEmployee = staff;
 
-        } else if (role.equals("MANAGER")) {
+        } else if (Role.MANAGER.getValue() == role) {
             newEmployee = new Manager(id, fullName, phoneNumber, workingDays);
         } else {
             double sharePercent = InputHelper.readDouble("Enter share percent (0-100)", 0, 100, "Share Percent");
@@ -163,8 +167,7 @@ public class EmployeeManager {
             return;
         }
 
-        System.out.printf("|%-14s|%-25s|%-12s|%-14s|%-13s|%-13s|\n",
-                "ID", "Full Name", "Role", "Phone Number", "Working Days", "Daily Wage");
+        Notification.printTitle();
         target.showInfo();
         System.out.println("|");
 
@@ -195,10 +198,13 @@ public class EmployeeManager {
      * Print information of all employees
      */
     public void getInfoOfAllEmployees() {
+        Notification.printTitle();
+
         for (Employee employee : employees) {
             employee.showInfo();
             System.out.println("|");
         }
+        System.out.println();
     }
 
     /**
@@ -223,20 +229,25 @@ public class EmployeeManager {
 
         for (Employee employee : employees) {
             if (employee instanceof Staff) {
-                if (employee.calculateMonthlySalary() > maxSalary) {
-                    maxSalary = employee.calculateMonthlySalary();
+                Staff staff = (Staff) employee;
+                double monthlySalary = staff.calculateMonthlySalary();
+
+                if (monthlySalary == maxSalary) {
+                    topSalaryStaffs.add(staff);
+                    continue;
+                }
+
+                if (monthlySalary > maxSalary) {
+                    maxSalary = monthlySalary;
                     topSalaryStaffs.clear();
-                    topSalaryStaffs.add((Staff) employee);
-                } else if (employee.calculateMonthlySalary() == maxSalary) {
-                    topSalaryStaffs.add((Staff) employee);
+                    topSalaryStaffs.add(staff);
                 }
             }
         }
 
         if (topSalaryStaffs.size() != 0) {
             System.out.println("The staffs with the highest salary are:");
-            System.out.printf("|%-14s|%-25s|%-12s|%-14s|%-13s|%-13s|%-25s|\n",
-                    "ID", "Full Name", "Role", "Phone Number", "Working Days", "Daily Wage", "Manager");
+            Notification.printTitle(Role.STAFF);
             for (Staff staff : topSalaryStaffs) {
                 staff.showExtraInfo();
             }
@@ -262,7 +273,10 @@ public class EmployeeManager {
                     maxStaffCount = staffCount;
                     managerWithMostStaffs.clear();
                     managerWithMostStaffs.add(manager);
-                } else if (staffCount == maxStaffCount) {
+                    continue;
+                }
+
+                if (staffCount == maxStaffCount) {
                     managerWithMostStaffs.add(manager);
                 }
             }
@@ -270,8 +284,7 @@ public class EmployeeManager {
 
         if (managerWithMostStaffs.size() != 0) {
             System.out.println("The managers with the most staff are: ");
-            System.out.printf("|%-14s|%-25s|%-12s|%-14s|%-13s|%-13s|%-12s|\n",
-                    "ID", "Full Name", "Role", "Phone Number", "Working Days", "Daily Wage", "No. of staff");
+            Notification.printTitle(Role.MANAGER);
             for (Manager manager : managerWithMostStaffs) {
                 manager.showExtraInfo();
             }
@@ -288,7 +301,7 @@ public class EmployeeManager {
 
         sortedList.stream().sorted(comparator).forEach(employee -> {
             employee.showInfo();
-            System.out.println();
+            System.out.println("|");
         });
     }
 
@@ -303,11 +316,15 @@ public class EmployeeManager {
             if (employee instanceof Director) {
                 Director director = (Director) employee;
                 double sharePercent = director.getSharePercent();
+
                 if (sharePercent > maxSharePercent) {
                     maxSharePercent = sharePercent;
                     directorWithMostSharePercents.clear();
                     directorWithMostSharePercents.add(director);
-                } else if (sharePercent == maxSharePercent) {
+                    continue;
+                }
+
+                if (sharePercent == maxSharePercent) {
                     directorWithMostSharePercents.add(director);
                 }
             }
@@ -315,8 +332,7 @@ public class EmployeeManager {
 
         if (directorWithMostSharePercents.size() != 0) {
             System.out.println("The directors with the most share percent are: ");
-            System.out.printf("|%-14s|%-25s|%-12s|%-14s|%-13s|%-13s|%-12s|\n",
-                    "ID", "Full Name", "Role", "Phone Number", "Working Days", "Daily Wage", "Share Percent (%)");
+            Notification.printTitle(Role.DIRECTOR);
             for (Director director : directorWithMostSharePercents) {
                 director.showExtraInfo();
             }
@@ -330,6 +346,8 @@ public class EmployeeManager {
      */
     public void printIncomeOfDeptDirector() {
         double companyProfit = company.calculateCompanyProfit(getAllSalaryOfCompany());
+
+        System.out.println(companyProfit);
         for (Employee employee : employees) {
             if (employee instanceof Director) {
                 Director director = (Director) employee;
@@ -345,22 +363,23 @@ public class EmployeeManager {
      * Print extra information of employees of a certain role
      */
     public void printExtraInformationOfEmployees() {
-        String role = InputHelper.readLine("Enter role [STAFF|MANAGER|DIRECTOR]", "(STAFF|MANAGER|DIRECTOR)",
-                "Role must be one of: STAFF, MANAGER, DIRECTOR");
+        int role = InputHelper.readInt("Enter role: Staff-1, Manager-2, Director-3", 1, 3, "Role");
 
-        if (role.equals("STAFF")) {
-            System.out.printf("|%-14s|%-25s|%-12s|%-14s|%-13s|%-13s|%-25s|\n",
-                    "ID", "Full Name", "Role", "Phone Number", "Working Days", "Daily Wage", "Manager");
+        if (Role.STAFF.getValue() == role) {
+            Notification.printTitle(Role.STAFF);
             _getEmployeesByType(Staff.class).forEach(Employee::showExtraInfo);
-        } else if (role.equals("MANAGER")) {
-            System.out.printf("|%-14s|%-25s|%-12s|%-14s|%-13s|%-13s|%-12s|\n",
-                    "ID", "Full Name", "Role", "Phone Number", "Working Days", "Daily Wage", "No. of staff");
-            _getEmployeesByType(Manager.class).forEach(Employee::showExtraInfo);
-        } else {
-            System.out.printf("|%-14s|%-25s|%-12s|%-14s|%-13s|%-13s|%-12s|\n",
-                    "ID", "Full Name", "Role", "Phone Number", "Working Days", "Daily Wage", "Share Percent (%)");
-            _getEmployeesByType(Director.class).forEach(Employee::showExtraInfo);
+            return;
         }
+
+        if (Role.MANAGER.getValue() == role) {
+            Notification.printTitle(Role.MANAGER);
+            _getEmployeesByType(Manager.class).forEach(Employee::showExtraInfo);
+            return;
+        }
+
+        Notification.printTitle(Role.DIRECTOR);
+        _getEmployeesByType(Director.class).forEach(Employee::showExtraInfo);
+
     }
 
     private <T extends Employee> List<T> _getEmployeesByType(Class<T> type) {
@@ -370,7 +389,9 @@ public class EmployeeManager {
                 .collect(Collectors.toList());
     }
 
-    private String generateId(String rolePrefix) {
+    private String generateId(int role) {
+        String rolePrefix = Role.values()[role].name();
+
         long maxIndex = employees.stream()
                 .map(employee -> employee.getId())
                 .filter(exitingId -> exitingId.startsWith(rolePrefix + "-"))
