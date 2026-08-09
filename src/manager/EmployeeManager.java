@@ -17,7 +17,6 @@ public class EmployeeManager {
     private final List<Employee> employees;
 
     public EmployeeManager() {
-        this.company = new Company();
         this.employees = new ArrayList<>(initialData());
     }
 
@@ -46,10 +45,17 @@ public class EmployeeManager {
      * Add a new company
      */
     public void enterInfoCompany() {
-        company.setName(InputHelper.readLine("Enter company name", "Name"));
-        company.setTaxCode(InputHelper.readLine("Enter company tax code", "\\d{10,13}",
-                "Tax Code must be 10 to 13 digits"));
-        company.setMonthlyRevenue(InputHelper.readDouble("Enter monthly revenue", "Monthly Revenue"));
+        if (company != null) {
+            System.out.println("Company information already exists.");
+            return;
+        }
+
+        String companyName = InputHelper.readLine("Enter company name", "Name");
+        String taxCode = InputHelper.readLine("Enter company tax code", "\\d{10,13}",
+                "Tax Code must be 10 to 13 digits");
+        double monthlyRevenue = InputHelper.readDouble("Enter monthly revenue", "Monthly Revenue");
+
+        company = Company.createInstance(companyName, monthlyRevenue, taxCode);
         company.showInfo();
     }
 
@@ -345,9 +351,15 @@ public class EmployeeManager {
      * Print the income of all directors
      */
     public void printIncomeOfDeptDirector() {
+        if (company == null) {
+            System.out.println("No company information available. Please enter company information first.");
+            return;
+        }
+
         double companyProfit = company.calculateCompanyProfit(getAllSalaryOfCompany());
 
-        System.out.println(companyProfit);
+        System.out.printf("|%-14s|%-25s|%-14s|%-13s|%-13s|%-12s|%-12s|\n",
+                "ID", "Full Name", "Phone Number", "Working Days", "Daily Wage", "Share Percent (%)", "Income");
         for (Employee employee : employees) {
             if (employee instanceof Director) {
                 Director director = (Director) employee;
@@ -380,6 +392,18 @@ public class EmployeeManager {
         Notification.printTitle(Role.DIRECTOR);
         _getEmployeesByType(Director.class).forEach(Employee::showExtraInfo);
 
+    }
+
+    /**
+     * Print information of the company
+     */
+    public void printInfoCompany() {
+        if (company == null) {
+            System.out.println("No company information available. Please enter company information first.");
+            return;
+        }
+
+        company.showInfo();
     }
 
     private <T extends Employee> List<T> _getEmployeesByType(Class<T> type) {

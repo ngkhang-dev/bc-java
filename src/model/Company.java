@@ -6,13 +6,14 @@ public class Company {
     private String taxCode;
     private double monthlyRevenue;
 
-    public Company() {
-    }
-
-    public Company(String name, double monthlyRevenue, String taxCode) {
+    private Company(String name, double monthlyRevenue, String taxCode) {
         this.name = name;
         this.monthlyRevenue = monthlyRevenue;
         this.taxCode = taxCode;
+    }
+
+    public static Company createInstance(String name, double monthlyRevenue, String taxCode) {
+        return new Company(name, monthlyRevenue, taxCode);
     }
 
     public double calculateCompanyProfit(double totalSalaryOfEmployees) {
@@ -23,7 +24,7 @@ public class Company {
         System.out.printf("""
                 - Company name: %-25s
                 - Tax code: %-15s
-                - Monthly revenue: %-15.2f
+                - Monthly revenue: %-15.2f\n
                 """, name, taxCode, monthlyRevenue);
     }
 

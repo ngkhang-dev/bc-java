@@ -70,9 +70,6 @@ public class MainApplication {
                     break;
                 case 11:
                     System.out.println("\nCalculate the income of the director");
-                    System.out.printf("|%-14s|%-25s|%-14s|%-13s|%-13s|%-12s|%-12s|\n",
-                            "ID", "Full Name", "Phone Number", "Working Days", "Daily Wage", "Share Percent (%)",
-                            "Income");
                     hrManager.printIncomeOfDeptDirector();
                     System.out.println();
                     break;
@@ -81,7 +78,11 @@ public class MainApplication {
                     System.out.println();
                     break;
                 case 13:
-                    System.out.println("Bye bye, see you next time!");
+                    System.out.println("\nInformation of company");
+                    hrManager.printInfoCompany();
+                    break;
+                case 14:
+                    System.out.println("\nBye bye, see you next time!");
                     break;
             }
 
@@ -103,6 +104,7 @@ public class MainApplication {
         menu.addOption("Find the director has the most shared percentage");
         menu.addOption("Calculate the income of the director");
         menu.addOption("Print extra information of employees by role");
+        menu.addOption("Print information of company");
         menu.addOption("Quit");
 
         return menu;
