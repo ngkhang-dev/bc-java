@@ -2,21 +2,22 @@ package model;
 
 public abstract class Employee {
 
+    private static final String ID_PATTERN = "^[A-Z]+-\\d{3,}$";
+    private static final String FULL_NAME_PATTERN = "\\S+(\\s+\\S+)+";
+    private static final String PHONE_PATTERN = "\\d{10,11}";
+
     protected String id;
     protected String fullName;
     protected String phoneNumber;
     protected double workingDays;
     protected double dailyWage;
 
-    public Employee() {
-    }
-
     public Employee(String id, String fullName, String phoneNumber, double workingDays, double dailyWage) {
-        this.id = id;
-        this.fullName = fullName;
-        this.phoneNumber = phoneNumber;
-        this.workingDays = workingDays;
-        this.dailyWage = dailyWage;
+        setId(id);
+        setFullName(fullName);
+        setPhoneNumber(phoneNumber);
+        setWorkingDays(workingDays);
+        setDailyWage(dailyWage);
     }
 
     public void showInfo() {
@@ -34,12 +35,19 @@ public abstract class Employee {
         return id;
     }
 
-    public void setId(String id) {
+    /**
+     * Sets the employee ID.
+     * Expected format: ROLE-INDEX, e.g. "STAFF-001".
+     * final: validation must not be bypassable by subclass overrides.
+     */
+    public final void setId(String id) {
         if (id == null || id.trim().isEmpty()) {
-            throw new IllegalArgumentException("ID không được bỏ trống");
+            throw new IllegalArgumentException("ID is required");
         }
 
-        // TODO: Validate ID must have format: ROLE-INDEX
+        if (!id.matches(ID_PATTERN)) {
+            throw new IllegalArgumentException("ID must follow the format ROLE-INDEX, e.g. STAFF-001");
+        }
 
         this.id = id;
     }
@@ -48,27 +56,35 @@ public abstract class Employee {
         return fullName;
     }
 
-    public void setFullName(String fullName) {
-        if (fullName == null || fullName.length() < 3) {
-            throw new IllegalArgumentException("Tên không được bỏ trống hoặc quá ngắn");
+    /**
+     * Sets the employee's full name.
+     * Must be at least 3 characters and contain at least two words.
+     * final: validation must not be bypassable by subclass overrides.
+     */
+    public final void setFullName(String fullName) {
+        if (fullName == null || fullName.trim().length() < 3) {
+            throw new IllegalArgumentException("Full name is required and must be at least 3 characters");
         }
 
-        // TODO: Validate full name must have 2 words
+        String trimmed = fullName.trim();
+        if (!trimmed.matches(FULL_NAME_PATTERN)) {
+            throw new IllegalArgumentException("Full name must contain at least two words");
+        }
 
-        this.fullName = fullName;
+        this.fullName = trimmed;
     }
 
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
+    public final void setPhoneNumber(String phoneNumber) {
         if (phoneNumber == null || phoneNumber.trim().isEmpty()) {
-            throw new IllegalArgumentException("Số điện thoại không được bỏ trống");
+            throw new IllegalArgumentException("Phone number is required");
         }
 
-        if (!phoneNumber.matches("\\d{10,11}")) {
-            throw new IllegalArgumentException("Số điện thoại phải có độ dài từ 10 đến 11 số");
+        if (!phoneNumber.matches(PHONE_PATTERN)) {
+            throw new IllegalArgumentException("Phone number must be 10 to 11 digits");
         }
 
         this.phoneNumber = phoneNumber;
@@ -78,9 +94,9 @@ public abstract class Employee {
         return workingDays;
     }
 
-    public void setWorkingDays(double workingDays) {
+    public final void setWorkingDays(double workingDays) {
         if (workingDays < 0) {
-            throw new IllegalArgumentException("Số ngày làm việc không được âm");
+            throw new IllegalArgumentException("Working days cannot be negative");
         }
 
         this.workingDays = workingDays;
@@ -90,9 +106,9 @@ public abstract class Employee {
         return dailyWage;
     }
 
-    public void setDailyWage(double dailyWage) {
+    public final void setDailyWage(double dailyWage) {
         if (dailyWage < 0) {
-            throw new IllegalArgumentException("Số tiền lương không được âm");
+            throw new IllegalArgumentException("Daily wage cannot be negative");
         }
         this.dailyWage = dailyWage;
     }

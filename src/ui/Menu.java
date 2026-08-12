@@ -9,9 +9,6 @@ public class Menu {
     private String menuTitle;
     private final ArrayList<String> optionList = new ArrayList<>();
 
-    public Menu() {
-    }
-
     public Menu(String menuTitle) {
         this.menuTitle = menuTitle;
     }

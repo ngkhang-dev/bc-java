@@ -30,7 +30,7 @@ public class EmployeeManager {
         Manager manager1 = new Manager("MANAGER-001", "Manager 1", "0987654321", 20);
         Staff staff1 = new Staff("STAFF-001", "Staff 1", "0977654321", 21, manager1);
         Staff staff2 = new Staff("STAFF-002", "Staff 2", "0978585466", 21, manager1);
-        manager1.setManagedStaff(staff1, staff2);
+        manager1.addStaff(staff1, staff2);
 
         Manager manager2 = new Manager("MANAGER-002", "Manager 2", "0988654921", 18);
         Staff staff3 = new Staff("STAFF-003", "Staff 3", "0908754021", 20, manager2);
@@ -94,8 +94,7 @@ public class EmployeeManager {
             return;
         }
 
-        manager.setManagedStaff(staff);
-        staff.setManager(manager);
+        manager.addStaff(staff);
     }
 
     /**
@@ -121,7 +120,8 @@ public class EmployeeManager {
     public void addEmployee() {
         int role = InputHelper.readInt("Enter role: Staff-1, Manager-2, Director-3", 1, 3, "Role");
 
-        String fullName = InputHelper.readLine("Enter full name", ".{3,}", "Full name must be at least 3 characters");
+        String fullName = InputHelper.readLine("Enter full name", "\\S+(\\s+\\S+)+",
+                "Full name must contain at least two words");
         String phoneNumber = InputHelper.readLine("Enter phone number", "\\d{10,11}",
                 "Phone number must be 10 to 11 digits");
         double workingDays = InputHelper.readDouble("Enter working days", 0, 31, "Working Days");
@@ -174,8 +174,7 @@ public class EmployeeManager {
         }
 
         Notification.printTitle();
-        target.showInfo();
-        System.out.println("|");
+        printEmployeeRow(target);
 
         String confirm = InputHelper.readLine("Are you sure you want to delete this employee? (y/n)");
         if (!confirm.equalsIgnoreCase("y")) {
@@ -185,10 +184,7 @@ public class EmployeeManager {
 
         if (target instanceof Manager) {
             Manager manager = (Manager) target;
-            for (Staff staff : manager.getManagedStaff()) {
-                staff.removeManager();
-            }
-            manager.getManagedStaff().clear();
+            manager.clearManagedStaff();
         } else if (target instanceof Staff) {
             Staff staff = (Staff) target;
             if (staff.getManager() != null) {
@@ -207,8 +203,7 @@ public class EmployeeManager {
         Notification.printTitle();
 
         for (Employee employee : employees) {
-            employee.showInfo();
-            System.out.println("|");
+            printEmployeeRow(employee);
         }
         System.out.println();
     }
@@ -305,10 +300,7 @@ public class EmployeeManager {
     public void sortEmployees(Comparator<Employee> comparator) {
         ArrayList<Employee> sortedList = new ArrayList<>(employees);
 
-        sortedList.stream().sorted(comparator).forEach(employee -> {
-            employee.showInfo();
-            System.out.println("|");
-        });
+        sortedList.stream().sorted(comparator).forEach(this::printEmployeeRow);
     }
 
     /**
@@ -379,18 +371,18 @@ public class EmployeeManager {
 
         if (Role.STAFF.getValue() == role) {
             Notification.printTitle(Role.STAFF);
-            _getEmployeesByType(Staff.class).forEach(Employee::showExtraInfo);
+            getEmployeesByType(Staff.class).forEach(Employee::showExtraInfo);
             return;
         }
 
         if (Role.MANAGER.getValue() == role) {
             Notification.printTitle(Role.MANAGER);
-            _getEmployeesByType(Manager.class).forEach(Employee::showExtraInfo);
+            getEmployeesByType(Manager.class).forEach(Employee::showExtraInfo);
             return;
         }
 
         Notification.printTitle(Role.DIRECTOR);
-        _getEmployeesByType(Director.class).forEach(Employee::showExtraInfo);
+        getEmployeesByType(Director.class).forEach(Employee::showExtraInfo);
 
     }
 
@@ -406,7 +398,15 @@ public class EmployeeManager {
         company.showInfo();
     }
 
-    private <T extends Employee> List<T> _getEmployeesByType(Class<T> type) {
+    /**
+     * Prints one table row for an employee, i.e., it showInfo() output followed by the closing "|"
+     */
+    private void printEmployeeRow(Employee employee) {
+        employee.showInfo();
+        System.out.println("|");
+    }
+
+    private <T extends Employee> List<T> getEmployeesByType(Class<T> type) {
         return employees.parallelStream()
                 .filter(type::isInstance)
                 .map(type::cast)
@@ -414,7 +414,7 @@ public class EmployeeManager {
     }
 
     private String generateId(int role) {
-        String rolePrefix = Role.values()[role].name();
+        String rolePrefix = Role.fromValue(role).name();
 
         long maxIndex = employees.stream()
                 .map(employee -> employee.getId())

@@ -15,4 +15,14 @@ public enum Role {
     public int getValue() {
         return value;
     }
+
+    public static Role fromValue(int value) {
+        for (Role role : values()) {
+            if (role.value == value) {
+                return role;
+            }
+        }
+
+        throw new IllegalArgumentException("No Role with value " + value);
+    }
 }

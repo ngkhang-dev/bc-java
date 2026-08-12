@@ -1,15 +1,15 @@
 package model;
 
-public class Company {
+public final class Company {
 
     private String name;
     private String taxCode;
     private double monthlyRevenue;
 
     private Company(String name, double monthlyRevenue, String taxCode) {
-        this.name = name;
-        this.monthlyRevenue = monthlyRevenue;
-        this.taxCode = taxCode;
+        setName(name);
+        setMonthlyRevenue(monthlyRevenue);
+        setTaxCode(taxCode);
     }
 
     public static Company createInstance(String name, double monthlyRevenue, String taxCode) {
@@ -34,7 +34,7 @@ public class Company {
 
     public void setName(String name) {
         if (name == null || name.trim().isEmpty()) {
-            throw new IllegalArgumentException("Tên công ty không bỏ trống");
+            throw new IllegalArgumentException("Company name is required");
         }
 
         this.name = name;
@@ -45,6 +45,10 @@ public class Company {
     }
 
     public void setMonthlyRevenue(double monthlyRevenue) {
+        if (monthlyRevenue < 0) {
+            throw new IllegalArgumentException("Monthly revenue cannot be negative");
+        }
+
         this.monthlyRevenue = monthlyRevenue;
     }
 
@@ -54,11 +58,11 @@ public class Company {
 
     public void setTaxCode(String taxCode) {
         if (taxCode == null || taxCode.trim().isEmpty()) {
-            throw new IllegalArgumentException("Mã số thuế không bỏ trống");
+            throw new IllegalArgumentException("Tax code is required");
         }
 
         if (!taxCode.matches("\\d{10,13}")) {
-            throw new IllegalArgumentException("Mã số thuế không hợp lệ");
+            throw new IllegalArgumentException("Tax code must be 10 to 13 digits");
         }
 
         this.taxCode = taxCode;
