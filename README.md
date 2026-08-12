@@ -17,10 +17,11 @@
 
 > Practice and follow-along code from class sessions, used for personal reference.
 
-| #  | Module      | Source code                       | Status      |
-|----|-------------|-----------------------------------|-------------|
-| 01 | Java Core   | [Source](01-modules/01-java-core) | Done        |
-| 02 | HTML-CSS-JS | TBD                               | In progress |
+| #  | Module                         | Source code                       | Status      |
+|----|--------------------------------|-----------------------------------|-------------|
+| 01 | Java Core                      | [Source](01-modules/01-java-core) | Done        |
+| 02 | HTML-CSS-JS                    | ...                               | Done        |
+| 03 | Docker - Relationship Database | TBD                               | In progress |
 
 ## Assignments
 
@@ -33,9 +34,9 @@
 
 ## Capstones
 
-| #  | Repository                          | Source | Status      |
-|----|-------------------------------------|--------|-------------|
-| 01 | Java Core - Capstone 01 - Employees | TBD    | In progress |
+| #  | Repository                          | Source                                       | Status |
+|----|-------------------------------------|----------------------------------------------|--------|
+| 01 | Java Core - Capstone 01 - Employees | [Source](03-capstone/01-java-core-employees) | Done   |
 
 ## Author
 
@@ -43,4 +44,4 @@
 
 ---
 
-- **Last updated:** 2026-08-01 22:09:02
+- **Last updated:** 2026-08-12 15:44:55
