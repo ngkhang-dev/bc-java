@@ -1,0 +1,21 @@
+# 7.
+CREATE INDEX idx_SinhVien_HoTen ON SinhVien(HoTen);
+
+# 8.
+CREATE INDEX idx_ChiTietHoaDon_MaHD_MaSP ON ChiTietHoaDon(MaHD, MaSP);
+
+# 9.
+CREATE UNIQUE INDEX idx_Users_email ON Users(Email);
+
+# 10.
+EXPLAIN ANALYZE
+SELECT *
+FROM HoaDon
+WHERE NgayTao BETWEEN '2026-01-01' AND '2026-09-06';
+
+CREATE INDEX idx_HoaDon_NgayTao ON HoaDon(NgayTao);
+
+EXPLAIN ANALYZE
+SELECT *
+FROM HoaDon
+WHERE NgayTao BETWEEN '2026-01-01' AND '2026-09-06';
