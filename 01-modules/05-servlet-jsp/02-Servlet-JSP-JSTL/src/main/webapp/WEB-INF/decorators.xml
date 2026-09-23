@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<decorators defaultdir="/decorators">
+	<decorator name="default" page="layout.jsp">
+		<!-- Áp dụng cho tất cả page -->
+		<pattern>/*</pattern>
+	</decorator>
+	
+	<decorator name="admin" page="admin-layout.jsp">
+		<!-- Áp dụng cho admin page -->
+		<pattern>/admin*</pattern>
+	</decorator>
+</decorators>

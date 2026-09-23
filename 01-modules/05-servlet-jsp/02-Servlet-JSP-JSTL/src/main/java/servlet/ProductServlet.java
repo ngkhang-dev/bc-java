@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import models.Product;
 
-@WebServlet(name = " Product", urlPatterns = "/products")
+@WebServlet(name = "Product", urlPatterns = "/products")
 public class ProductServlet extends HttpServlet {
 
 	@Override
