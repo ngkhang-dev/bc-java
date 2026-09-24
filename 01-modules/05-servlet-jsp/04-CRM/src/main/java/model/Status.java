@@ -3,9 +3,13 @@ package model;
 public class Status {
 	private int id;
 	private String statusName;
-	
+
 	public Status() {
 		// TODO Auto-generated constructor stub
+	}
+
+	public Status(String statusName) {
+		this.statusName = statusName;
 	}
 
 	public Status(int id, String statusName) {

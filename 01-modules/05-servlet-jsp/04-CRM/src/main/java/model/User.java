@@ -2,8 +2,7 @@ package model;
 
 public class User {
 	private int id;
-	private String firstName;
-	private String lastName;
+	private String fullName;
 	private String email;
 	private String password;
 	private String phone;
@@ -14,10 +13,8 @@ public class User {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(String firstName, String lastName, String email, String password, String phone, String country,
-			int roleId) {
-		this.firstName = firstName;
-		this.lastName = lastName;
+	public User(String fullName, String email, String password, String phone, String country, int roleId) {
+		this.fullName = fullName;
 		this.email = email;
 		this.password = password;
 		this.phone = phone;
@@ -25,11 +22,9 @@ public class User {
 		this.roleId = roleId;
 	}
 
-	public User(int id, String firstName, String lastName, String email, String password, String phone, String country,
-			int roleId) {
+	public User(int id, String fullName, String email, String password, String phone, String country, int roleId) {
 		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
+		this.fullName = fullName;
 		this.email = email;
 		this.password = password;
 		this.phone = phone;
@@ -45,20 +40,12 @@ public class User {
 		this.id = id;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getFullName() {
+		return fullName;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setFirstName(String fullName) {
+		this.fullName = fullName;
 	}
 
 	public String getEmail() {
