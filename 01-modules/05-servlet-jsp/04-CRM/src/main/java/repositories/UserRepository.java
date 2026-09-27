@@ -52,4 +52,26 @@ public class UserRepository {
 
 		return users;
 	}
+
+	public boolean create(User user) {
+		String query = """
+				INSERT INTO User (email, password, fullName, phone, country, role_id)
+				VALUES (?, ?, ?, ?, ?, ?)
+				""";
+
+		try (Connection conn = DBConnection.getConnection(); PreparedStatement pre = conn.prepareStatement(query)) {
+
+			pre.setString(1, user.getEmail());
+			pre.setString(2, user.getPassword());
+			pre.setString(3, user.getFullName());
+			pre.setString(4, user.getPhone());
+			pre.setString(5, user.getCountry());
+			pre.setInt(6, user.getRoleId());
+
+			return pre.executeUpdate() == 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }
