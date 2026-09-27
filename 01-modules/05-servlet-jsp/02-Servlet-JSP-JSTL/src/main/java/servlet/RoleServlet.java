@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,10 +24,6 @@ public class RoleServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		/*
-		 * Connection test = JDBCConnection.getConnection(); System.out.println(test);
-		 */
-
 		String path = req.getServletPath();
 
 		switch (path) {
@@ -50,7 +47,6 @@ public class RoleServlet extends HttpServlet {
 
 		switch (path) {
 		case "/role/add": {
-
 			String name = req.getParameter("name");
 			String description = req.getParameter("description");
 
