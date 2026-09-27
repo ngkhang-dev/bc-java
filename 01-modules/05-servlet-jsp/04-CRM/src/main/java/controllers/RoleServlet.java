@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.RoleDAO;
 import model.Role;
@@ -25,10 +26,16 @@ public class RoleServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//		HttpSession session = req.getSession(false);
+//		
+//		if (session == null || session.getAttribute("currentUser") == null) {
+//			resp.sendRedirect(req.getContextPath() + "/login");
+//			return;
+//		}
+		
 		List<Role> roles = roleDAO.getAll();
 
 		req.setAttribute("roles", roles);
-		System.out.println(roles);
 
 		req.getRequestDispatcher("/views/role-table.jsp").forward(req, resp);
 	}
