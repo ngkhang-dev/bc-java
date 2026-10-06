@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
-
 <nav class="navbar navbar-default navbar-static-top m-b-0">
   <div class="navbar-header">
     <a

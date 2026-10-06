@@ -26,25 +26,25 @@ public class AuthController extends HttpServlet {
 		HttpSession session = req.getSession(false);
 
 		switch (path) {
-		case "/login": {
-//			if (session != null && session.getAttribute("currentUser") != null) {
-//				resp.sendRedirect(req.getContextPath() + "/");
-//				return;
-//			}
+			case "/login": {
+				if (session != null && session.getAttribute("currentUser") != null) {
+					resp.sendRedirect(req.getContextPath() + "/");
+					return;
+				}
 
-			req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
-			break;
-		}
-		case "/logout": {
-			if (session != null && session.getAttribute("currentUser") != null) {
-				session.invalidate();
+				req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
+				break;
 			}
+			case "/logout": {
+				if (session != null && session.getAttribute("currentUser") != null) {
+					session.invalidate();
+				}
 
-			resp.sendRedirect(req.getContextPath() + "/login");
-			break;
-		}
-		default:
-			throw new IllegalArgumentException("Unexpected value: " + path);
+				resp.sendRedirect(req.getContextPath() + "/login");
+				break;
+			}
+			default:
+				throw new IllegalArgumentException("Unexpected value: " + path);
 		}
 	}
 
@@ -54,33 +54,32 @@ public class AuthController extends HttpServlet {
 		HttpSession session = req.getSession(false);
 
 		switch (path) {
-		case "/login": {
-			String email = req.getParameter("email");
-			String password = req.getParameter("password");
+			case "/login": {
+				String email = req.getParameter("email");
+				String password = req.getParameter("password");
 
-			User user = authService.login(email, password);
+				User user = authService.login(email, password);
 
-			if (user == null) {
-				req.setAttribute("error", "Email or Password incorrect");
+				if (user == null) {
+					req.setAttribute("error", "Email or Password incorrect");
 
-				req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
-				return;
+					req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
+					return;
+				}
+
+				// Hide password
+				user.setPassword(null);
+				session.setAttribute("currentUser", user);
+				session.setMaxInactiveInterval(30 * 60);
+
+				resp.sendRedirect(req.getContextPath() + "/");
+				break;
 			}
-
-			// Hide password
-			user.setPassword(null);
-			session.setAttribute("currentUser", user);
-			session.setMaxInactiveInterval(30 * 60);
-
-			resp.sendRedirect(req.getContextPath() + "/");
-			break;
+			case "/logout": {
+				break;
+			}
+			default:
+				throw new IllegalArgumentException("Unexpected value: " + path);
 		}
-		case "/logout": {
-			break;
-		}
-		default:
-			throw new IllegalArgumentException("Unexpected value: " + path);
-		}
-
 	}
 }

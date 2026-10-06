@@ -19,20 +19,18 @@ public class RoleServlet extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
-		// TODO Auto-generated method stub
-		super.init();
 		roleDAO = new RoleDAO();
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		HttpSession session = req.getSession(false);
-//		
-//		if (session == null || session.getAttribute("currentUser") == null) {
-//			resp.sendRedirect(req.getContextPath() + "/login");
-//			return;
-//		}
-		
+		HttpSession session = req.getSession(false);
+
+		if (session == null || session.getAttribute("currentUser") == null) {
+			resp.sendRedirect(req.getContextPath() + "/login");
+			return;
+		}
+
 		List<Role> roles = roleDAO.getAll();
 
 		req.setAttribute("roles", roles);

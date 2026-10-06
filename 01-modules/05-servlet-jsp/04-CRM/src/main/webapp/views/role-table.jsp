@@ -38,14 +38,14 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                       <a href="#" class="btn btn-sm btn-primary">Sửa</a>
                       <a href="#" class="btn btn-sm btn-danger">Xóa</a>
                     </td>
-                  </tr>
-                </c:forEach>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- /.row -->
-  </div>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /.row -->
+	</div>
 </div>

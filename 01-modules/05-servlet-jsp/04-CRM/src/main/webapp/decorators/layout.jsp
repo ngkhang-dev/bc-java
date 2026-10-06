@@ -71,13 +71,14 @@ uri="http://www.opensymphony.com/sitemesh/decorator"%>
     <div class="preloader">
       <div class="cssload-speeding-wheel"></div>
     </div>
-
     <div id="wrapper">
       <!-- Navigation -->
+      <!-- HEADER -->
       <%@ include file="../layout/header.jsp" %>
-
       <!-- Left navbar-header -->
+      <!-- sidebar -->
       <%@ include file="../layout/sidebar.jsp" %>
+
       <!-- Left navbar-header end -->
       <!-- Page Content -->
 

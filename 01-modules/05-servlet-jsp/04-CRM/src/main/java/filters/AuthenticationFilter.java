@@ -2,7 +2,6 @@ package filters;
 
 import java.io.IOException;
 
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -14,26 +13,26 @@ import javax.servlet.http.HttpSession;
 
 @WebFilter("/*")
 public class AuthenticationFilter implements Filter {
-	@Override
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-			throws IOException, ServletException {
-		HttpServletRequest req = (HttpServletRequest) request;
-		HttpServletResponse resp = (HttpServletResponse) response;
+  @Override
+  public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+      throws IOException, ServletException {
+    HttpServletRequest req = (HttpServletRequest) request;
+    HttpServletResponse resp = (HttpServletResponse) response;
 
-		boolean isLoginPage = req.getServletPath().equals("/login");
+    boolean isLoginPage = req.getServletPath().equals("/login");
 
-//		// Lấy session từ request
-		HttpSession session = req.getSession(false);
-//
-//		// Trạng thái user đã đăng nhập: session != null và currentUser != null
-		boolean isLoggedIn = session != null && session.getAttribute("currentUser") != null;
+    // // Lấy session từ request
+    HttpSession session = req.getSession(false);
+    //
+    // // Trạng thái user đã đăng nhập: session != null và currentUser != null
+    boolean isLoggedIn = session != null && session.getAttribute("currentUser") != null;
 
-		if (isLoggedIn || isLoginPage) {
-			// Cho phép request đi tiếp đến Servlet
-			chain.doFilter(req, resp);
-			return;
-		}
+    if (isLoggedIn || isLoginPage) {
+      // Cho phép request đi tiếp đến Servlet
+      chain.doFilter(req, resp);
+      return;
+    }
 
-		resp.sendRedirect(req.getContextPath() + "/login");
-	}
+    resp.sendRedirect(req.getContextPath() + "/login");
+  }
 }

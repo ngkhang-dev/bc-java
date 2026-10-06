@@ -13,7 +13,8 @@ public class AuthService {
 	}
 
 	public User login(String email, String password) {
-		if (email == null || email.trim() == null || password == null || password.trim() == null) {
+		if (email == null || email.trim() == null
+				|| password == null || password.trim() == null) {
 			return null;
 		}
 
@@ -23,9 +24,9 @@ public class AuthService {
 		}
 
 		// Version 1:
-//		if (!user.getPassword().equals(password)) {
-//			return null;
-//		}
+		// if (!user.getPassword().equals(password)) {
+		// return null;
+		// }
 
 		// Version 2: Sử dụng Bcrypt
 		boolean isCorrectPassword = BCrypt.checkpw(password, user.getPassword());
