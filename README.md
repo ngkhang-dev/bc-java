@@ -25,13 +25,14 @@
 
 > Practice and follow-along code from class sessions, used for personal reference.
 
-| #   | Module                        | Source code                       | Status      |
-| --- | ----------------------------- | --------------------------------- | ----------- |
-| 01  | Java Core                     | [Source](01-modules/01-java-core) | Done        |
-| 02  | HTML-CSS-JS                   | ...                               | Done        |
-| 03  | Docker                        | TBD                               | In progress |
-| 04  | Relationship Database - MySQL | TBD                               | In progress |
-| 05  | Servlet - JSP                 | TBD                               | In progress |
+| #   | Module                        | Source code                          | Status      |
+| --- | ----------------------------- | ------------------------------------ | ----------- |
+| 01  | Java Core                     | [Source](01-modules/01-java-core)    | Done        |
+| 02  | HTML-CSS-JS                   | ...                                  | Done        |
+| 03  | Docker and Linux              | [Source](01-modules/03-docker/)      | Done        |
+| 04  | Relationship Database - MySQL | [Source](01-modules/04-database/)    | Done        |
+| 05  | Servlet - JSP                 | [Source](01-modules/05-servlet-jsp/) | Done        |
+| 06  | Git/GitHub                    | [Source](01-modules/06-git/)         | In progress |
 
 ## Assignments
 
@@ -48,9 +49,10 @@
 
 ## Capstones
 
-| #   | Repository                          | Source                                       | Status |
-| --- | ----------------------------------- | -------------------------------------------- | ------ |
-| 01  | Java Core - Capstone 01 - Employees | [Source](03-capstone/01-java-core-employees) | Done   |
+| #   | Repository                          | Source                                       | Status      |
+| --- | ----------------------------------- | -------------------------------------------- | ----------- |
+| 01  | Java Core - Capstone 01 - Employees | [Source](03-capstone/01-java-core-employees) | Done        |
+| 02  | Servlet - Capstone 02 - CRM         | ...                                          | In progress |
 
 ## Author
 
@@ -58,4 +60,4 @@
 
 ---
 
-- **Last updated:** 2026-09-17
+- **Last updated:** 2026-10-07
