@@ -32,20 +32,21 @@
 | 03  | Docker and Linux              | [Source](01-modules/03-docker/)      | Done        |
 | 04  | Relationship Database - MySQL | [Source](01-modules/04-database/)    | Done        |
 | 05  | Servlet - JSP                 | [Source](01-modules/05-servlet-jsp/) | Done        |
-| 06  | Git/GitHub                    | [Source](01-modules/06-git/)         | In progress |
+| 06  | Git/GitHub                    | [Source](01-modules/06-git/)         | Done        |
+| 07  | Spring Boot                   | [Source](01-modules/07-spring-boot/) | In progress |
 
 ## Assignments
 
-| Module    | #   | Assignment           | Status      | Source                                                            |
-| --------- | --- | -------------------- | ----------- | ----------------------------------------------------------------- |
-| Java Core | 01  | Conditional          | Done        | [Source](02-assignments/01-java-core/assign-01-conditional/)      |
-| Java Core | 02  | Loop                 | Done        | [Source](02-assignments/01-java-core/assign-02-loop/)             |
-| Java Core | 03  | OOP                  | Done        | [Source](02-assignments/01-java-core/assign-03-oop/)              |
-| Java Core | 04  | OOP                  | Done        | [Source](02-assignments/01-java-core/assign-04-oop/)              |
-| Database  | 05  | SQL Quan ly Ban sach | Done        | [Source](02-assignments/04-database/assign-05-sql-QuanLyBanSach/) |
-| Database  | 06  | Query basic          | Done        | [Source](02-assignments/04-database/assign-06-query/)             |
-| Database  | 07  | Query Advance        | Done        | [Source](02-assignments/04-database/assign-07-query-advance/)     |
-| Servlet   | 08  | Servlet Jsp          | In progress | ...                                                               |
+| Module    | #   | Assignment           | Status | Source                                                            |
+| --------- | --- | -------------------- | ------ | ----------------------------------------------------------------- |
+| Java Core | 01  | Conditional          | Done   | [Source](02-assignments/01-java-core/assign-01-conditional/)      |
+| Java Core | 02  | Loop                 | Done   | [Source](02-assignments/01-java-core/assign-02-loop/)             |
+| Java Core | 03  | OOP                  | Done   | [Source](02-assignments/01-java-core/assign-03-oop/)              |
+| Java Core | 04  | OOP                  | Done   | [Source](02-assignments/01-java-core/assign-04-oop/)              |
+| Database  | 05  | SQL Quan ly Ban sach | Done   | [Source](02-assignments/04-database/assign-05-sql-QuanLyBanSach/) |
+| Database  | 06  | Query basic          | Done   | [Source](02-assignments/04-database/assign-06-query/)             |
+| Database  | 07  | Query Advance        | Done   | [Source](02-assignments/04-database/assign-07-query-advance/)     |
+| Servlet   | 08  | Servlet Jsp          | Done   | [Source](02-assignments/05-servlet/assign-08-servlet-jsp/)        |
 
 ## Capstones
 
@@ -60,4 +61,4 @@
 
 ---
 
-- **Last updated:** 2026-10-07
+- **Last updated:** 2026-10-11
