@@ -1,6 +1,9 @@
 package com.cybersoft.demospringboot.controller;
 
+import com.cybersoft.demospringboot.dto.DatabaseDTO;
 import com.cybersoft.demospringboot.request.UpdateProductRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,9 +11,17 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/product")
 public class ProductController {
 
+    @Autowired
+    @Qualifier("db1")
+    private DatabaseDTO databaseDTO;
+
     @GetMapping
     public ResponseEntity<?> getListOfProduct(@RequestParam String keyWord, @RequestParam int pageNum) {
-        return ResponseEntity.ok("Danh sach san pham voi keyWord: " + keyWord + " trang " + pageNum);
+
+        System.out.println("DB Username: " + databaseDTO.getUsername() + "");
+        databaseDTO.setUsername(keyWord);
+
+        return ResponseEntity.ok(databaseDTO);
     }
 
     @PostMapping
