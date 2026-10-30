@@ -1,3 +1,13 @@
 spring:
   application:
     name: demojpa
+  datasource:
+    url: jdbc:mysql://localhost:3307/my_database?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Ho_Chi_Minh
+    username: root
+    password: Root@1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
