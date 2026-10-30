@@ -1,0 +1,17 @@
+services:
+  # Đặt tên Image
+  mysql14:
+    image: mysql:latest # Image nằm trên Docker Hub
+    container_name: mysqlclass14 # Đặt tên cho container
+    ports:
+      - 3307:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin123
+
+  # redis14:
+  #   image: redis:latest # Image nằm trên Docker Hub
+  #   container_name: redisclass14 # Đặt tên cho container
+  #   ports:
+  #     - 3307:6372
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=admin123
