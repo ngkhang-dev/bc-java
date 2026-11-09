@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: uniclub14
+  datasource:
+    url: jdbc:mysql://localhost:3307/uniclub?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Ho_Chi_Minh
+    username: root
+    password: Root@1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
