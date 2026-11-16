@@ -1,6 +1,4 @@
 spring:
-  application:
-    name: uniclub14
   datasource:
     url: jdbc:mysql://localhost:3307/uniclub?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Ho_Chi_Minh
     username: root
@@ -11,3 +9,6 @@ spring:
     hibernate:
       ddl-auto: none
     show-sql: true
+
+jwt:
+  key: ZdQhKkRX1pvraPjzf+ahUk/NkiWLI/N5assC23jlfjM=

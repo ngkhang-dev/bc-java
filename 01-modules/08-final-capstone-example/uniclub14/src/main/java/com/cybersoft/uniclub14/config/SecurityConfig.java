@@ -2,8 +2,9 @@ package com.cybersoft.uniclub14.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -19,7 +20,7 @@ public class SecurityConfig {
                     // Cho phép request URL không cần chứng thực.
                     // Cách 1 (recommendation): set up tập trung tại 1 nơi
                     // request.requestMatchers("/auth/sign-in").permitAll(); // Mọi method
-                    // request.requestMatchers(HttpMethod.POST, "/auth/sign-in").permitAll(); // Chỉ cho phép method: POST
+                    // request.requestMatchers(HttpMethod.POST, "/auth/sign-in").permitAll(); // Chỉ cho method POST
                     request.requestMatchers("/auth/**").permitAll(); // Cho phép mọi method với URL bắt đầu /auth
                     // Cách 2: có thể sử dụng annotation @Role, @PreAuthorize ở Controller nhưng khó quản lý
 
@@ -27,5 +28,10 @@ public class SecurityConfig {
                     request.anyRequest().authenticated();
                 })
                 .build();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }
