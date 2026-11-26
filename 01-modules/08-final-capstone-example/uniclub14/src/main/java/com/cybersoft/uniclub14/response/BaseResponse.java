@@ -8,15 +8,11 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BaseResponse {
-    private int code;
-    private String message;
-    private Object data;
+  private int code;
+  private String message;
+  private Object data;
 
-    public static BaseResponse success(Object data) {
-        return BaseResponse.builder()
-                .code(200)
-                .message("success")
-                .data(data)
-                .build();
-    }
+  public static BaseResponse success(Object data) {
+    return BaseResponse.builder().code(200).message("success").data(data).build();
+  }
 }
